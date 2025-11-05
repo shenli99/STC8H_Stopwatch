@@ -41,47 +41,50 @@ void System_Init(void)
     Key_Init();         // 按键初始化
     LED_Init();         // LED初始化
     
+    Task_Register(TASK_10MS, Key_Scan);
+
     // 初始显示00:00
     TM1650_Display_Zero();
     LED_Update(LED_STATE_RESET);  // 初始为清零状态
     
     // 延时一段时间让硬件稳定
     for(i = 0; i < 50000; i++) _nop_();
+    Stopwatch_Init();
 }
 
 /**
  * @brief 硬件测试函数
  */
-void Hardware_Test(void)
-{
-    unsigned int i;
+// void Hardware_Test(void)
+// {
+//     unsigned int i;
     
-    // 测试LED灯 - 依次点亮
-    LED_Blue_Off();
-    LED_Green_On();
-    for(i = 0; i < 0xFFFE; i++) _nop_();
+//     // 测试LED灯 - 依次点亮
+//     LED_Blue_Off();
+//     LED_Green_On();
+//     for(i = 0; i < 0xFFFE; i++) _nop_();
     
-    LED_Green_Off();
-    LED_Red_On();
-    for(i = 0; i < 0xFFFE; i++) _nop_();
+//     LED_Green_Off();
+//     LED_Red_On();
+//     for(i = 0; i < 0xFFFE; i++) _nop_();
     
-    LED_Red_Off();
-    LED_Blue_On();
-    for(i = 0; i < 0xFFFE; i++) _nop_();
+//     LED_Red_Off();
+//     LED_Blue_On();
+//     for(i = 0; i < 0xFFFE; i++) _nop_();
     
-    LED_Blue_Off();
+//     LED_Blue_Off();
     
-    // 测试数码管
-    TM1650_Test();  // 显示8888
-    for(i = 0; i < 0xFFFE; i++) _nop_();
+//     // 测试数码管
+//     TM1650_Test();  // 显示8888
+//     for(i = 0; i < 0xFFFE; i++) _nop_();
     
-    TM1650_SimpleTest();  // 显示1234
-    for(i = 0; i < 0xFFFE; i++) _nop_();
+//     TM1650_SimpleTest();  // 显示1234
+//     for(i = 0; i < 0xFFFE; i++) _nop_();
     
-    // 恢复初始状态
-    TM1650_Display_Zero();
-    LED_Update(LED_STATE_RESET);
-}
+//     // 恢复初始状态
+//     TM1650_Display_Zero();
+//     LED_Update(LED_STATE_RESET);
+// }
 
 void main(void)
 {
@@ -90,15 +93,15 @@ void main(void)
     // 进行硬件测试
     // Hardware_Test();
     
-    LED_Blue_Off();
+    // LED_Blue_Off();
 
     // 注册任务函数到任务系统
     // Task_Register(TASK_1MS, Time_Update_Task);
     // Task_Register(TASK_10MS, Key_Process_Task);
-    
+
     while(1)
     {
-        // Task_Dispatch();
+        Task_Dispatch();
     }
 }
 
@@ -106,54 +109,54 @@ void main(void)
  * @brief 时间更新任务
  */
 // 简化Time_Update_Task函数
-void Time_Update_Task(void)
-{
-    if(g_running)
-    {
-        g_millisecond++;
+// void Time_Update_Task(void)
+// {
+//     if(g_running)
+//     {
+//         g_millisecond++;
         
-        // 每秒更新
-        if(g_millisecond >= 1000)
-        {
-            g_millisecond = 0;
-            g_second++;
+//         // 每秒更新
+//         if(g_millisecond >= 1000)
+//         {
+//             g_millisecond = 0;
+//             g_second++;
             
-            // 小数点闪烁
-            g_dot_flag = !g_dot_flag;
+//             // 小数点闪烁
+//             g_dot_flag = !g_dot_flag;
             
-            // 每分钟更新
-            if(g_second >= 60)
-            {
-                g_second = 0;
-                g_minute++;
+//             // 每分钟更新
+//             if(g_second >= 60)
+//             {
+//                 g_second = 0;
+//                 g_minute++;
                 
-                // 达到99:59自动停止并清零
-                if(g_minute >= 100)
-                {
-                    g_minute = 0;
-                    g_second = 0;
-                    g_running = 0;
-                    LED_Update(LED_STATE_RESET);
-                }
-            }
-        }
+//                 // 达到99:59自动停止并清零
+//                 if(g_minute >= 100)
+//                 {
+//                     g_minute = 0;
+//                     g_second = 0;
+//                     g_running = 0;
+//                     LED_Update(LED_STATE_RESET);
+//                 }
+//             }
+//         }
         
-        // 每100ms更新一次显示
-        if(g_millisecond % 100 == 0)
-        {
-            TM1650_Display_Time(g_minute, g_second, g_dot_flag);
-        }
-    }
-    else
-    {
-        // 暂停状态下每500ms更新一次小数点闪烁
-        static unsigned char pause_counter = 0;
-        pause_counter++;
-        if(pause_counter >= 5)
-        {
-            pause_counter = 0;
-            g_dot_flag = !g_dot_flag;
-            TM1650_Display_Time(g_minute, g_second, g_dot_flag);
-        }
-    }
-}
+//         // 每100ms更新一次显示
+//         if(g_millisecond % 100 == 0)
+//         {
+//             TM1650_Display_Time(g_minute, g_second, g_dot_flag);
+//         }
+//     }
+//     else
+//     {
+//         // 暂停状态下每500ms更新一次小数点闪烁
+//         static unsigned char pause_counter = 0;
+//         pause_counter++;
+//         if(pause_counter >= 5)
+//         {
+//             pause_counter = 0;
+//             g_dot_flag = !g_dot_flag;
+//             TM1650_Display_Time(g_minute, g_second, g_dot_flag);
+//         }
+//     }
+// }

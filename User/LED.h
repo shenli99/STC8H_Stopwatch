@@ -2,8 +2,8 @@
 #define __LED_H__
 
 // LED引脚定义 - 绿色(运行)接P01，红色(暂停)接P00，蓝色(清零)接P02
-sbit LED_RED = P0^0;  // 绿色LED
-sbit LED_GREEN   = P0^1;  // 红色LED
+sbit LED_RED = P0^0;  // 红色LED
+sbit LED_GREEN   = P0^1;  // 绿色LED
 sbit LED_BLUE  = P0^2;  // 蓝色LED
 
 // LED状态定义

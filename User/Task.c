@@ -5,8 +5,8 @@
 Task_CB task_table[TASK_MAX] = {
     {TASK_1MS, 1, 1, NULL},
     {TASK_10MS, 10, 10, NULL},
-    {TASK_100MS, 100, 100, NULL},
-    {TASK_1S, 1000, 1000, NULL}
+    {TASK_50MS, 50, 50, NULL},
+    {TASK_100MS, 100, 100, NULL}
 };
 
 /**

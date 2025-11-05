@@ -10,7 +10,7 @@
 extern void Stopwatch_Init(void);
 extern void Stopwatch_Run(void);
 extern void Stopwatch_Stop(void);
-extern void Stopwatch_Toggle(void);
+extern void Stopwatch_Toggle(unsigned char key);
 extern void Stopwatch_Reset(void);
 extern void Stopwatch_UpdateDisplay(void);
 

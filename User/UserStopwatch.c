@@ -2,6 +2,7 @@
 #include "UserStopwatch.h"
 #include "TM1650.h"
 #include "LED.h"
+#include "Key.h"
 #include "Task.h"
 
 // 秒表变量
@@ -12,18 +13,18 @@ unsigned char dot_flag = 0;  // 小数点闪烁标志
 /**
  * @brief 秒表1ms任务函数
  */
-void Stopwatch_Task_1ms(void)
+void Stopwatch_Update_1ms(void)
 {
     if(stopwatch_state == STOPWATCH_STATE_RUN)
     {
         stopwatch_count++;
-        if(stopwatch_count >= 60000)  // 最多计数到60秒
+        if (stopwatch_count >= 60000)  // 最多计数到60秒
         {
             stopwatch_count = 0;
+            Stopwatch_Reset();
         }
-        
-        // 每500ms闪烁一次小数点
-        if(stopwatch_count % 500 == 0)
+
+        if (stopwatch_count % 500 == 0)
         {
             dot_flag = !dot_flag;
         }
@@ -33,17 +34,19 @@ void Stopwatch_Task_1ms(void)
 /**
  * @brief 秒表100ms任务函数
  */
-void Stopwatch_Task_100ms(void)
+void Stopwatch_Update_100ms(void)
 {
     Stopwatch_UpdateDisplay();
 }
 
 /**
- * @brief 秒表1s任务函数
+ * @brief 秒表50ms任务函数
  */
-void Stopwatch_Task_1s(void)
+void Stopwatch_Update_50ms(void)
 {
-    // 可以添加需要1秒执行一次的操作
+    unsigned char key;
+    key = Key_GetPressed();
+    Stopwatch_Toggle(key);
 }
 
 /**
@@ -56,9 +59,9 @@ void Stopwatch_Init(void)
     dot_flag = 0;
     
     // 注册任务函数
-    Task_Register(TASK_1MS, Stopwatch_Task_1ms);
-    Task_Register(TASK_100MS, Stopwatch_Task_100ms);
-    Task_Register(TASK_1S, Stopwatch_Task_1s);
+    Task_Register(TASK_1MS, Stopwatch_Update_1ms);
+    Task_Register(TASK_100MS, Stopwatch_Update_100ms);
+    Task_Register(TASK_50MS, Stopwatch_Update_50ms);
     
     LED_Update(LED_STATE_RESET);
     Stopwatch_UpdateDisplay();
@@ -89,21 +92,6 @@ void Stopwatch_Stop(void)
 }
 
 /**
- * @brief 秒表启动/停止切换
- */
-void Stopwatch_Toggle(void)
-{
-    if(stopwatch_state == STOPWATCH_STATE_RUN)
-    {
-        Stopwatch_Stop();
-    }
-    else
-    {
-        Stopwatch_Run();
-    }
-}
-
-/**
  * @brief 秒表复位
  */
 void Stopwatch_Reset(void)
@@ -114,6 +102,45 @@ void Stopwatch_Reset(void)
     
     TM1650_Display_Time(0, 0, 0);
     LED_Update(LED_STATE_RESET);
+}
+
+/**
+ * @brief 秒表启动/停止切换
+ */
+void Stopwatch_Toggle(unsigned char key)
+{
+    if(stopwatch_state == STOPWATCH_STATE_RUN)
+    {
+        if (key == 1) 
+        {
+            Stopwatch_Stop();
+        }
+        if (key == 2) 
+        {
+
+        }
+    }
+    else if(stopwatch_state == STOPWATCH_STATE_STOP)
+    {
+        if (key == 1) 
+        {
+
+        }
+        if (key == 2) 
+        {
+            Stopwatch_Reset();
+        }
+    }else if (stopwatch_state == STOPWATCH_STATE_RESET)
+    {
+        if (key == 1) 
+        {
+            Stopwatch_Run();
+        }
+        if (key == 2) 
+        {
+            
+        }
+    }
 }
 
 /**

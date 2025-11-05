@@ -38,7 +38,7 @@ void Key_Scan(void)
     key2_buffer = (key2_buffer << 1) | KEY2;
     
     // 检测按键1是否按下（低电平有效）
-    if((key1_buffer & 0xF8) == 0x00)
+    if((key1_buffer & 0x07) == 0x00)
     {
         // 按键1按下，切换秒表状态
         key1_buffer = 0xFF;  // 清除缓冲区，避免重复触发
@@ -46,10 +46,28 @@ void Key_Scan(void)
     }
     
     // 检测按键2是否按下
-    if((key2_buffer & 0xF8) == 0x00)
+    if((key2_buffer & 0x07) == 0x00)
     {
         // 按键2按下，重置秒表
         key2_buffer = 0xFF;  // 清除缓冲区，避免重复触发
         key2_pressed = 1;  // 按键2按下标志位置1
+    }
+}
+
+unsigned char Key_GetPressed()
+{
+    if (key1_pressed)
+    {
+        key1_pressed = 0;
+        return 1;
+    }
+    else if (key2_pressed)
+    {
+        key2_pressed = 0;
+        return 2;
+    }
+    else
+    {
+        return 0;
     }
 }

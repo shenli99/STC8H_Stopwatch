@@ -6,8 +6,8 @@ typedef enum
 {
     TASK_1MS,
     TASK_10MS,
+    TASK_50MS,
     TASK_100MS,
-    TASK_1S,
     TASK_MAX
 } Task_ID;
 
