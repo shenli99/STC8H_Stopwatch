@@ -1,7 +1,7 @@
 #ifndef __TM1650_H__
 #define __TM1650_H__
 
-#include "c"
+#include "common.h"
 #include "Soft_I2C.h"
 
 // TM1650地址
