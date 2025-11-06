@@ -18,10 +18,10 @@
 #define TM1650_BRIGHTNESS_1 0x00  // 最暗
 
 // 函数声明
-extern void TM1650_Init(unsigned char brightness);
-extern void TM1650_Write(unsigned char addr, unsigned char dat);
-extern void TM1650_Display_Time(unsigned char minute, unsigned char second, bit dot_flag);
-extern void TM1650_Clear(void);
-extern void TM1650_Display_Zero(void);
+void TM1650_Init(u8 brightness);
+void TM1650_Write(u8 addr, u8 dat);
+void TM1650_Display_Time(u8 minute, u8 second, bit dot_flag);
+void TM1650_Clear(void);
+void TM1650_Display_Zero(void);
 
 #endif /* __TM1650_H__ */
