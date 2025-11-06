@@ -7,9 +7,7 @@ u8 code SEG_TAB[] = {
 
 u8 TM1650_state[] = {0x00, 0x00, 0x00, 0x00}; 
 
-/**
- * @brief TM1650初始化
- */
+// TM1650初始化
 void TM1650_Init(u8 brightness)
 {
     u16 i;
@@ -37,10 +35,7 @@ void TM1650_Init(u8 brightness)
     TM1650_Display_Zero();
 }
 
-/**
- * @brief 显示时间 - 格式为 MM:SS
- */
-// 优化前：带有多个延时的完整版本
+// 显示时间 - 格式为 MM:SS
 void TM1650_Display_Time(u8 minute, u8 second, bit dot_flag)
 {
     // 分解时间
@@ -56,18 +51,13 @@ void TM1650_Display_Time(u8 minute, u8 second, bit dot_flag)
     TM1650_Write(0x6E, TM1650_state[3]);
 }
 
-/**
- * @brief 向TM1650写入一个字节
- */
-// 移除不必要的延时和重试逻辑，简化通信函数
+// 向TM1650写入一个字节
 void TM1650_Write(unsigned char addr, unsigned char dat)
 {
     SI2C_WriteByteNoDev(addr, dat);
 }
 
-/**
- * @brief 清除显示
- */
+// 清除显示
 void TM1650_Clear(void)
 {
     TM1650_Write(0x68, 0x00 | 0x80);
@@ -76,9 +66,7 @@ void TM1650_Clear(void)
     TM1650_Write(0x6E, 0x00);
 }
 
-/**
- * @brief 显示00:00
- */
+// 显示00:00
 void TM1650_Display_Zero(void)
 {
     TM1650_Write(0x68, SEG_TAB[0]);  // 第一位显示0
