@@ -14,17 +14,15 @@ sbit LED_BLUE  = P0^2;  // 蓝色LED
 #define LED_STATE_RESET  2
 
 // 函数声明
-extern void LED_Init(void);
-extern void LED_Green_On(void);
-void LED_Green_Toggle(void);
-extern void LED_Green_Off(void);
-extern void LED_Red_On(void);
-void LED_Red_Toggle(void);
-extern void LED_Red_Off(void);
-extern void LED_Blue_On(void);
-void LED_Red_Toggle(void);
-extern void LED_Blue_Off(void);
-extern void LED_Update(unsigned char state);
-extern void LED_Test(void);
+void LED_Init(void);
+
+void LED_Green_On(void);
+void LED_Green_Off(void);
+void LED_Red_On(void);
+void LED_Red_Off(void);
+void LED_Blue_On(void);
+void LED_Blue_Off(void);
+
+void LED_Update(u8 state);
 
 #endif /* __LED_H__ */
