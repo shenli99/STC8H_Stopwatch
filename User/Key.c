@@ -1,11 +1,11 @@
 #include "Key.h"
 
 // 按键变量
-unsigned char key1_buffer = 0;
-unsigned char key2_buffer = 0;
+u8 key1_buffer = 0;
+u8 key2_buffer = 0;
 
-unsigned char key1_state = KEY_NONE;
-unsigned char key2_state = KEY_NONE;
+u8 key1_state = KEY_NONE;
+u8 key2_state = KEY_NONE;
 
 /**
  * @brief 按键初始化
@@ -49,7 +49,7 @@ void Key_Scan(void)
     key2_buffer = (key2_buffer << 1) | KEY2;
 }
 
-unsigned char Key_GetPressed()
+u8 Key_GetPressed()
 {
     if (key1_state == KEY_CAPTURE)
     {

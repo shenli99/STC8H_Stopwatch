@@ -14,6 +14,6 @@ sbit KEY2 = P3^3;  // KEY2(复位)接P33
 // 函数声明
 extern void Key_Init(void);
 extern void Key_Scan(void);
-extern unsigned char Key_GetPressed();
+extern u8 Key_GetPressed();
 
 #endif /* __KEY_H__ */
