@@ -1,14 +1,11 @@
 #include "UserStopwatch.h"
 
-
 // 秒表变量
 u32 stopwatch_count = 0;  // 毫秒计数
-unsigned char stopwatch_state = STOPWATCH_STATE_RESET;  // 秒表状态
-unsigned char dot_flag = 0;  // 小数点闪烁标志
+u8 stopwatch_state = STOPWATCH_STATE_RESET;  // 秒表状态
+u8 dot_flag = 0;  // 小数点闪烁标志
 
-/**
- * @brief 秒表1ms任务函数
- */
+// 秒表1ms任务函数
 void Stopwatch_Update_1ms(void)
 {
     if(stopwatch_state == STOPWATCH_STATE_RUN)
@@ -27,27 +24,21 @@ void Stopwatch_Update_1ms(void)
     }
 }
 
-/**
- * @brief 秒表100ms任务函数
- */
+// 秒表100ms任务函数
 void Stopwatch_Update_100ms(void)
 {
     Stopwatch_UpdateDisplay();
 }
 
-/**
- * @brief 秒表50ms任务函数
- */
+// 秒表50ms任务函数
 void Stopwatch_Update_50ms(void)
 {
-    unsigned char key;
+    u8 key;
     key = Key_GetPressed();
     Stopwatch_Toggle(key);
 }
 
-/**
- * @brief 秒表初始化
- */
+// 秒表初始化
 void Stopwatch_Init(void)
 {
     stopwatch_count = 0;
@@ -63,9 +54,7 @@ void Stopwatch_Init(void)
     Stopwatch_UpdateDisplay();
 }
 
-/**
- * @brief 秒表开始运行
- */
+// 秒表开始运行
 void Stopwatch_Run(void)
 {
     if(stopwatch_state != STOPWATCH_STATE_RUN)
@@ -75,9 +64,7 @@ void Stopwatch_Run(void)
     }
 }
 
-/**
- * @brief 秒表停止运行
- */
+// 秒表停止运行
 void Stopwatch_Stop(void)
 {
     if(stopwatch_state == STOPWATCH_STATE_RUN)
@@ -87,9 +74,7 @@ void Stopwatch_Stop(void)
     }
 }
 
-/**
- * @brief 秒表复位
- */
+// 秒表复位
 void Stopwatch_Reset(void)
 {
     stopwatch_count = 0;
@@ -100,10 +85,8 @@ void Stopwatch_Reset(void)
     LED_Update(LED_STATE_RESET);
 }
 
-/**
- * @brief 秒表启动/停止切换
- */
-void Stopwatch_Toggle(unsigned char key)
+// 秒表启动/停止切换
+void Stopwatch_Toggle(u8 key)
 {
     if(stopwatch_state == STOPWATCH_STATE_RUN)
     {
@@ -139,12 +122,10 @@ void Stopwatch_Toggle(unsigned char key)
     }
 }
 
-/**
- * @brief 更新秒表显示
- */
+// 更新秒表显示
 void Stopwatch_UpdateDisplay(void)
 {
-    unsigned char minute, second;
+    u8 minute, second;
     
     // 计算分和秒
     second = stopwatch_count / 1000;
