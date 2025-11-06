@@ -1,2 +1,4 @@
 # STC8H_Stopwatch
-a simple stopwatch in stc8h
+This a simple **Stopwatch** at STC8H board.
+
+You can read this [document](asset/simple_stopwatch.mht) to know what functions are implemented.
