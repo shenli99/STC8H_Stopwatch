@@ -72,10 +72,3 @@ void Task_Register(u8 task_id, Task_Func func)
         task_table[task_id].counter = task_table[task_id].period;
     }
 }
-
-// 简化任务控制块，只保留必要功能
-typedef struct {
-    unsigned char Run;
-    unsigned char Timer;
-    unsigned char ItvTime;
-} TASKCB;
