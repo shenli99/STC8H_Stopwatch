@@ -13,10 +13,9 @@
 #ifndef	__STC8G_H_SOFT_I2C_H
 #define	__STC8G_H_SOFT_I2C_H
 
-#include	"STC8H.h"
+#include "common.h"
 
 #define MAIN_Fosc		24000000L	//定义主时钟
-typedef unsigned char u8;
 
 void I2C_Init(void);
 void I2C_delay(void);

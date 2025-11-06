@@ -1,7 +1,4 @@
-#include "STC8H.h"
 #include "Key.h"
-#include "UserStopwatch.h"
-#include "Task.h"
 
 // 按键变量
 unsigned char key1_buffer = 0;
