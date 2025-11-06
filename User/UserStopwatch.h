@@ -5,6 +5,7 @@
 #define STOPWATCH_STATE_STOP    0  // 停止状态
 #define STOPWATCH_STATE_RUN     1  // 运行状态
 #define STOPWATCH_STATE_RESET   2  // 复位状态
+#include "Type_def.h"
 
 // 函数声明
 extern void Stopwatch_Init(void);

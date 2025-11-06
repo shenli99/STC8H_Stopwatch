@@ -6,7 +6,7 @@
 #include "Task.h"
 
 // 秒表变量
-unsigned int stopwatch_count = 0;  // 毫秒计数
+u32 stopwatch_count = 0;  // 毫秒计数
 unsigned char stopwatch_state = STOPWATCH_STATE_RESET;  // 秒表状态
 unsigned char dot_flag = 0;  // 小数点闪烁标志
 

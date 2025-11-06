@@ -7,8 +7,8 @@
 unsigned char key1_buffer = 0;
 unsigned char key2_buffer = 0;
 
-unsigned char key1_pressed = 0;
-unsigned char key2_pressed = 0;
+unsigned char key1_state = KEY_NONE;
+unsigned char key2_state = KEY_NONE;
 
 /**
  * @brief 按键初始化
@@ -32,38 +32,36 @@ void Key_Init(void)
  */
 void Key_Scan(void)
 {
-    // 读取按键状态并处理消抖
-    // 由于上拉，按键输入默认为1，按下时为0
+    if (KEY1 == 0 && key1_state == KEY_NONE)
+    {
+        key1_state = KEY_PRESSED;
+    }else if (key1_state == KEY_PRESSED && KEY1 == 1 && (key1_buffer & 0x07) == 0x00)
+    {
+        key1_state = KEY_CAPTURE;
+    }
+
+    if (KEY2 == 0 && key1_state == KEY_NONE)
+    {
+        key2_state = KEY_PRESSED;
+    }else if (key2_state == KEY_PRESSED && KEY1 == 1 && (key2_buffer & 0x07) == 0x00)
+    {
+        key2_state = KEY_CAPTURE;
+    }
+    
     key1_buffer = (key1_buffer << 1) | KEY1;
     key2_buffer = (key2_buffer << 1) | KEY2;
-    
-    // 检测按键1是否按下（低电平有效）
-    if((key1_buffer & 0x07) == 0x00)
-    {
-        // 按键1按下，切换秒表状态
-        key1_buffer = 0xFF;  // 清除缓冲区，避免重复触发
-        key1_pressed = 1;  // 按键1按下标志位置1
-    }
-    
-    // 检测按键2是否按下
-    if((key2_buffer & 0x07) == 0x00)
-    {
-        // 按键2按下，重置秒表
-        key2_buffer = 0xFF;  // 清除缓冲区，避免重复触发
-        key2_pressed = 1;  // 按键2按下标志位置1
-    }
 }
 
 unsigned char Key_GetPressed()
 {
-    if (key1_pressed)
+    if (key1_state == KEY_CAPTURE)
     {
-        key1_pressed = 0;
+        key1_state = KEY_NONE;
         return 1;
     }
-    else if (key2_pressed)
+    else if (key2_state == KEY_CAPTURE)
     {
-        key2_pressed = 0;
+        key2_state = KEY_NONE;
         return 2;
     }
     else

@@ -47,6 +47,7 @@ void System_Init(void)
     TM1650_Display_Zero();
     LED_Update(LED_STATE_RESET);  // 初始为清零状态
     
+    TM1650_Clear();
     // 延时一段时间让硬件稳定
     for(i = 0; i < 50000; i++) _nop_();
     Stopwatch_Init();
@@ -104,59 +105,3 @@ void main(void)
         Task_Dispatch();
     }
 }
-
-/**
- * @brief 时间更新任务
- */
-// 简化Time_Update_Task函数
-// void Time_Update_Task(void)
-// {
-//     if(g_running)
-//     {
-//         g_millisecond++;
-        
-//         // 每秒更新
-//         if(g_millisecond >= 1000)
-//         {
-//             g_millisecond = 0;
-//             g_second++;
-            
-//             // 小数点闪烁
-//             g_dot_flag = !g_dot_flag;
-            
-//             // 每分钟更新
-//             if(g_second >= 60)
-//             {
-//                 g_second = 0;
-//                 g_minute++;
-                
-//                 // 达到99:59自动停止并清零
-//                 if(g_minute >= 100)
-//                 {
-//                     g_minute = 0;
-//                     g_second = 0;
-//                     g_running = 0;
-//                     LED_Update(LED_STATE_RESET);
-//                 }
-//             }
-//         }
-        
-//         // 每100ms更新一次显示
-//         if(g_millisecond % 100 == 0)
-//         {
-//             TM1650_Display_Time(g_minute, g_second, g_dot_flag);
-//         }
-//     }
-//     else
-//     {
-//         // 暂停状态下每500ms更新一次小数点闪烁
-//         static unsigned char pause_counter = 0;
-//         pause_counter++;
-//         if(pause_counter >= 5)
-//         {
-//             pause_counter = 0;
-//             g_dot_flag = !g_dot_flag;
-//             TM1650_Display_Time(g_minute, g_second, g_dot_flag);
-//         }
-//     }
-// }

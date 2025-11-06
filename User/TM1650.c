@@ -31,7 +31,7 @@ void TM1650_Init(unsigned char brightness)
     for(i = 0; i < 100; i++) _nop_();
     
     // TM1650控制命令：正确的控制命令格式
-    ctrl_cmd = 0x09; 
+    ctrl_cmd = 0x01; 
     
     SI2C_WriteByteNoDev(0x48, ctrl_cmd | brightness);
 
@@ -75,7 +75,7 @@ void TM1650_Write(unsigned char addr, unsigned char dat)
  */
 void TM1650_Clear(void)
 {
-    TM1650_Write(0x68, 0x00);
+    TM1650_Write(0x68, 0x00 | 0x80);
     TM1650_Write(0x6A, 0x00);
     TM1650_Write(0x6C, 0x00);
     TM1650_Write(0x6E, 0x00);
@@ -87,7 +87,7 @@ void TM1650_Clear(void)
 void TM1650_Display_Zero(void)
 {
     TM1650_Write(0x68, SEG_TAB[0]);  // 第一位显示0
-    TM1650_Write(0x6A, SEG_TAB[0]);  // 第二位显示0
+    TM1650_Write(0x6A, SEG_TAB[0]);  // 第二位显示0.
     TM1650_Write(0x6C, SEG_TAB[0]);  // 第三位显示0
     TM1650_Write(0x6E, SEG_TAB[0]);  // 第四位显示0
 }
