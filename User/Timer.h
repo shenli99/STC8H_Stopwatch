@@ -1,6 +1,9 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
+#include "common.h"
+#include "Task.h"
+
 // 函数声明
 extern void Timer0_Init(void);
 

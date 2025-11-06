@@ -1,7 +1,4 @@
-#include "STC8H.h"
 #include "Timer.h"
-#include "Task.h"
-#include "LED.h"
 
 
 // 定时器0初始化（1ms中断）
