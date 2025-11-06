@@ -119,31 +119,7 @@ void I2C_WriteAbyte(u8 dat)     //write a byte to I2C
 	while(--i);
 }
 
-//========================================================================
-// 函数: u8 I2C_ReadAbyte(void)
-// 描述: I2C读取一个字节数据函数.
-// 参数: none.
-// 返回: 读取数据.
-// 版本: V1.0, 2020-09-15
-//========================================================================
-u8 I2C_ReadAbyte(void)          //read A byte from I2C
-{
-	u8 i,dat;
-	i = 8;
-	SDA = 1;
-	do
-	{
-		SCL = 1;
-		I2C_Delay();
-		dat <<= 1;
-		if(SDA)     dat++;
-		SCL  = 0;
-		I2C_Delay();
-	}
-	while(--i);
-	return(dat);
-}
-
+// IIC发送函数，无设备地址
 int SI2C_WriteByteNoDev(u8 mem_addr, u8 dat) 
 {
 	int i = 0;
