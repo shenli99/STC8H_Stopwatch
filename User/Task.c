@@ -1,4 +1,3 @@
-#include "STC8H.h"
 #include "Task.h"
 
 // 任务控制块数组
