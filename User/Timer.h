@@ -5,6 +5,6 @@
 #include "Task.h"
 
 // 函数声明
-extern void Timer0_Init(void);
+void Timer0_Init(void);
 
 #endif /* __TIMER_H__ */
