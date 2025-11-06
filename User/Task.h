@@ -26,9 +26,9 @@ typedef struct
 } Task_CB;
 
 // 函数声明
-extern void Task_Init(void);
-extern void Task_Dispatch(void);
-extern void Task_1ms_Count(void);
-extern void Task_Register(u8 task_id, Task_Func func);
+void Task_Init(void);
+void Task_Dispatch(void);
+void Task_1ms_Count(void);
+void Task_Register(u8 task_id, Task_Func func);
 
 #endif /* __TASK_H__ */
