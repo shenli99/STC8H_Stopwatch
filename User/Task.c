@@ -13,7 +13,7 @@ Task_CB task_table[TASK_MAX] = {
  */
 void Task_Init(void)
 {
-    unsigned char i;
+    u8 i;
     for(i = 0; i < TASK_MAX; i++)
     {
         task_table[i].counter = task_table[i].period;
@@ -26,7 +26,7 @@ void Task_Init(void)
  */
 void Task_1ms_Count(void)
 {
-    unsigned char i;
+    u8 i;
     for(i = 0; i < TASK_MAX; i++)
     {
         if(task_table[i].counter > 0)
@@ -41,7 +41,7 @@ void Task_1ms_Count(void)
  */
 void Task_Dispatch(void)
 {
-    unsigned char i;
+    u8 i;
     for(i = 0; i < TASK_MAX; i++)
     {
         if(task_table[i].counter == 0)
@@ -58,9 +58,9 @@ void Task_Dispatch(void)
 /**
  * @brief 注册任务函数 - 确保正确覆盖
  */
-void Task_Register(unsigned char task_id, Task_Func func)
+void Task_Register(u8 task_id, Task_Func func)
 {
-    unsigned int i;  // 移到函数开头
+    u8 i;  // 移到函数开头
     
     if(task_id < TASK_MAX)
     {

@@ -20,8 +20,8 @@ typedef void (*Task_Func)(void);
 typedef struct
 {
     Task_ID id;
-    unsigned int period;
-    unsigned int counter;
+    u16 period;
+    u16 counter;
     Task_Func task_func;
 } Task_CB;
 
@@ -29,6 +29,6 @@ typedef struct
 extern void Task_Init(void);
 extern void Task_Dispatch(void);
 extern void Task_1ms_Count(void);
-extern void Task_Register(unsigned char task_id, Task_Func func);
+extern void Task_Register(u8 task_id, Task_Func func);
 
 #endif /* __TASK_H__ */
