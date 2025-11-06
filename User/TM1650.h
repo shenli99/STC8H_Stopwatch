@@ -1,7 +1,7 @@
 #ifndef __TM1650_H__
 #define __TM1650_H__
 
-#include "common.h"
+#include "c"
 #include "Soft_I2C.h"
 
 // TM1650地址
@@ -22,8 +22,6 @@ extern void TM1650_Init(unsigned char brightness);
 extern void TM1650_Write(unsigned char addr, unsigned char dat);
 extern void TM1650_Display_Time(unsigned char minute, unsigned char second, bit dot_flag);
 extern void TM1650_Clear(void);
-extern void TM1650_Test(void);
-extern void TM1650_SimpleTest(void);
 extern void TM1650_Display_Zero(void);
 
 #endif /* __TM1650_H__ */

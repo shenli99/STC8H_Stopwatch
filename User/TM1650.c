@@ -5,8 +5,6 @@ unsigned char code SEG_TAB[] = {
     0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F
 };
 
-unsigned char dot = 0x80;
-
 unsigned char TM1650_state[] = {0x00, 0x00, 0x00, 0x00}; 
 
 /**
@@ -84,29 +82,7 @@ void TM1650_Clear(void)
 void TM1650_Display_Zero(void)
 {
     TM1650_Write(0x68, SEG_TAB[0]);  // 第一位显示0
-    TM1650_Write(0x6A, SEG_TAB[0]);  // 第二位显示0.
+    TM1650_Write(0x6A, SEG_TAB[0] | 0x80);  // 第二位显示0.
     TM1650_Write(0x6C, SEG_TAB[0]);  // 第三位显示0
     TM1650_Write(0x6E, SEG_TAB[0]);  // 第四位显示0
-}
-
-/**
- * @brief 显示测试模式 - 显示8888
- */
-void TM1650_Test(void)
-{
-    TM1650_Write(0x68, SEG_TAB[8]);  // 第一位显示8
-    TM1650_Write(0x6A, SEG_TAB[8]);  // 第二位显示8
-    TM1650_Write(0x6C, SEG_TAB[8]);  // 第三位显示8
-    TM1650_Write(0x6E, SEG_TAB[8]);  // 第四位显示8
-}
-
-/**
- * @brief 简单数码管测试 - 显示1234
- */
-void TM1650_SimpleTest(void)
-{
-    TM1650_Write(0x68, SEG_TAB[1]);  // 第一位显示1
-    TM1650_Write(0x6A, SEG_TAB[2]);  // 第二位显示2
-    TM1650_Write(0x6C, SEG_TAB[3]);  // 第三位显示3
-    TM1650_Write(0x6E, SEG_TAB[4]);  // 第四位显示4
 }
