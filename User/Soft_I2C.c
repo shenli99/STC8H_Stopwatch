@@ -12,9 +12,6 @@
 
 #include	"Soft_I2C.h"
 
-sbit    SDA = P1^4; //定义SDA
-sbit    SCL = P1^5; //定义SCL
-
 //========================================================================
 // 函数: void I2C_Delay(void)
 // 描述: I2C延时函数.
@@ -29,6 +26,7 @@ void I2C_Delay(void) //for normal MCS51, delay (2 * dly + 4) T, for STC12Cxxxx d
 	while(--dly);
 }
 
+// IIC初始化函数
 void I2C_Init(void)
 {
 	P1M1 |= 0x30;   // 设置P1.4和P1.5为开漏模式

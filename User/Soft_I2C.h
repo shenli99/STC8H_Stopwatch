@@ -15,6 +15,9 @@
 
 #include "common.h"
 
+sbit    SDA = P1^4; //定义SDA
+sbit    SCL = P1^5; //定义SCL
+
 #define MAIN_Fosc		24000000L	//定义主时钟
 
 void I2C_Init(void);
