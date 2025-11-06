@@ -1,9 +1,5 @@
-#include "STC8H.h"
 #include "UserStopwatch.h"
-#include "TM1650.h"
-#include "LED.h"
-#include "Key.h"
-#include "Task.h"
+
 
 // 秒表变量
 u32 stopwatch_count = 0;  // 毫秒计数
