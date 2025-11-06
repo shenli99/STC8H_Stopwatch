@@ -6,6 +6,7 @@
 #include "LED.h"
 #include "Key.h"
 #include "Task.h"
+#include "Timer.h"
 
 // 秒表状态
 #define STOPWATCH_STATE_STOP    0  // 停止状态

@@ -41,6 +41,26 @@ void Stopwatch_Update_50ms(void)
 // 秒表初始化
 void Stopwatch_Init(void)
 {
+    u16 i;
+
+    for(i = 0; i < 10000; i++) _nop_();
+    
+    Task_Init();  // 初始化任务系统
+    Timer0_Init();  // 初始化定时器0
+
+    for(i = 0; i < 5000; i++) _nop_();
+
+    TM1650_Init(TM1650_BRIGHTNESS_8);  // 初始化数码管
+    TM1650_Clear();  // 清除数码管显示
+
+    Key_Init();  // 初始化按键
+    Task_Register(TASK_10MS, Key_Scan);  // 注册按键扫描任务
+
+    LED_Init();  // 初始化LED
+    LED_Update(LED_STATE_RESET);  // 熄灭LED
+
+    for(i = 0; i < 50000; i++) _nop_();
+
     stopwatch_count = 0;
     stopwatch_state = STOPWATCH_STATE_RESET;
     dot_flag = 0;
