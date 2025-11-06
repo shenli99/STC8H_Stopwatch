@@ -1,8 +1,7 @@
 #ifndef __USER_STOPWATCH_H__
 #define __USER_STOPWATCH_H__
 
-#include "STC8H.h"
-#include "Type_def.h"
+#include "commom.h"
 #include "TM1650.h"
 #include "LED.h"
 #include "Key.h"
