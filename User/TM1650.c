@@ -1,6 +1,3 @@
-#include "STC8H.h"
-#include "intrins.h"
-#include "Soft_I2C.h"
 #include "TM1650.h"
 
 // 共阴数码管段码表（0-9）
