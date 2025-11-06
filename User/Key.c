@@ -1,15 +1,14 @@
 #include "Key.h"
 
-// 按键变量
+// 按键计时变量
 u8 key1_buffer = 0;
 u8 key2_buffer = 0;
 
+// 按键状态变量
 u8 key1_state = KEY_NONE;
 u8 key2_state = KEY_NONE;
 
-/**
- * @brief 按键初始化
- */
+// 按键初始化函数
 void Key_Init(void)
 {
     // 上拉电阻配置（按下接地）
@@ -24,9 +23,7 @@ void Key_Init(void)
     // Task_Register(TASK_10MS, Key_Scan);
 }
 
-/**
- * @brief 按键扫描任务函数
- */
+///按键扫描任务函数
 void Key_Scan(void)
 {
     if (KEY1 == 0 && key1_state == KEY_NONE)
@@ -49,6 +46,7 @@ void Key_Scan(void)
     key2_buffer = (key2_buffer << 1) | KEY2;
 }
 
+// 获取按键按下状态函数
 u8 Key_GetPressed()
 {
     if (key1_state == KEY_CAPTURE)
