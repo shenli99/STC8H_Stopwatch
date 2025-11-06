@@ -1,5 +1,3 @@
-#include "STC8H.h"
-#include "intrins.h"
 #include "LED.h"
 
 /**
