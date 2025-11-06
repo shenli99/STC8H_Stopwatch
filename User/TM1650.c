@@ -1,19 +1,19 @@
 #include "TM1650.h"
 
 // 共阴数码管段码表（0-9）
-unsigned char code SEG_TAB[] = {
+u8 code SEG_TAB[] = {
     0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F
 };
 
-unsigned char TM1650_state[] = {0x00, 0x00, 0x00, 0x00}; 
+u8 TM1650_state[] = {0x00, 0x00, 0x00, 0x00}; 
 
 /**
  * @brief TM1650初始化
  */
-void TM1650_Init(unsigned char brightness)
+void TM1650_Init(u8 brightness)
 {
-    unsigned int i;
-    unsigned char ctrl_cmd;
+    u16 i;
+    u8 ctrl_cmd;
     
     I2C_Init();
     
@@ -41,7 +41,7 @@ void TM1650_Init(unsigned char brightness)
  * @brief 显示时间 - 格式为 MM:SS
  */
 // 优化前：带有多个延时的完整版本
-void TM1650_Display_Time(unsigned char minute, unsigned char second, bit dot_flag)
+void TM1650_Display_Time(u8 minute, u8 second, bit dot_flag)
 {
     // 分解时间
     TM1650_state[0] = SEG_TAB[minute / 10];    // 分钟十位
